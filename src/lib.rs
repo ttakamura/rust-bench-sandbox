@@ -1,8 +1,24 @@
 #![feature(test)]
 extern crate test;
 
-pub fn add_two(a: i32) -> i32 {
-    a + 2
+const VEC_SIZE: usize = 1000000;
+
+pub fn vec_loop() {
+    let mut x: Vec<u32> = vec![1; VEC_SIZE];
+    for _ in 0..10 {
+        for n in 0..VEC_SIZE {
+            x[n] = x[n] + 3;
+        }
+    }
+}
+
+pub fn array_loop() {
+    let mut x = [1; 100000];
+    for _ in 0..10 {
+        for n in 0..100000 {
+            x[n] = x[n] + 3;
+        }
+    }
 }
 
 #[cfg(test)]
@@ -11,7 +27,12 @@ mod tests {
     use test::Bencher;
 
     #[bench]
-    fn bench_add_two(b: &mut Bencher) {
-        b.iter(|| add_two(2));
+    fn bench_vec(b: &mut Bencher) {
+        b.iter(|| vec_loop());
+    }
+
+    #[bench]
+    fn bench_array(b: &mut Bencher) {
+        b.iter(|| array_loop());
     }
 }
