@@ -1,0 +1,6 @@
+[package]
+name = "rust-bench"
+version = "0.1.0"
+authors = ["Tatsuya Takamura <takamura@tonchidot.com>"]
+
+[dependencies]
